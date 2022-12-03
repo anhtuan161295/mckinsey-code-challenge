@@ -15,6 +15,7 @@ public class Result {
      *  3. INTEGER_ARRAY bundleCosts
      */
 
+    // this approach will get Time Limit Exceeded
     public static int budgetShopping(int n, List<Integer> bundleQuantities, List<Integer> bundleCosts) {
         // Write your code here
         return exploreCombinations(n, 0, 0, bundleQuantities, bundleCosts);
@@ -37,10 +38,16 @@ public class Result {
     }
 
     public static void main(String[] args) {
-        List<Integer> quantities = Arrays.asList(20, 19);
-        List<Integer> costs = Arrays.asList(24, 20);
+        List<Integer> quantities = Arrays.asList(10);
+        List<Integer> costs = Arrays.asList(2);
 
-        int i = budgetShopping(50, quantities, costs);
-        System.out.println("Max shopping "+i);
+        int i = budgetShopping(4, quantities, costs);
+        System.out.println("Max shopping " + i); // 20
+
+        List<Integer> quantities2 = Arrays.asList(20, 19);
+        List<Integer> costs2 = Arrays.asList(24, 20);
+
+        int i2 = budgetShopping(50, quantities2, costs2);
+        System.out.println("Max shopping " + i2); // 40
     }
 }
