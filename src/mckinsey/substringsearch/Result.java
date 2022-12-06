@@ -12,7 +12,52 @@ public class Result {
      * The function accepts STRING s as parameter.
      */
 
+    // two pointer approach
+    // https://www.geeksforgeeks.org/count-of-substrings-having-all-distinct-characters/
+    // Time complexity: O(N3)
+    // Auxiliary Space: O(1)
+    public static int findSubstringsV3(String s) {
+        int len = s.length();
+        // Stores the count of subStrings
+        int ans = 0;
+        // Stores the frequency of characters
+        int[] cnt = new int[26];
+        // Initialised both pointers to beginning of the String
+        int left = 0, right = 0;
+
+        while (left < len) {
+            // If all characters in subString from index i to j are distinct
+            if (right < len && (cnt[s.charAt(right) - 'a'] == 0)) {
+
+                // Increment count of j-th character
+                cnt[s.charAt(right) - 'a']++;
+
+                // Add all subString ending
+                // at j and starting at any
+                // index between i and j
+                // to the answer
+                ans += (right - left + 1);
+
+                // Increment 2nd pointer
+                right++;
+            }
+
+            // If some characters are repeated or j pointer has reached to end
+            else {
+                // Decrement count of j-th character
+                cnt[s.charAt(left) - 'a']--;
+
+                // Increment first pointer
+                left++;
+            }
+        }
+
+        return ans;
+    }
+
     // brute force solution
+    // Time complexity: O(N3)
+    // Auxiliary Space: O(1)
     public static int findSubstrings(String s) {
         // Write your code here
         // a list to store all subStrings with length = 1
@@ -104,10 +149,10 @@ public class Result {
     }
 
     public static void main(String[] args) {
-        int result = Result.findSubstringsV2("bcada"); // 12
+        int result = Result.findSubstringsV3("bcada"); // 12
         System.out.println(result);
 
-//        int result2 = Result.findSubstringsV2("abcd"); // 10
-//        System.out.println(result2);
+        int result2 = Result.findSubstringsV3("abcd"); // 10
+        System.out.println(result2);
     }
 }
